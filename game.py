@@ -24,7 +24,7 @@ def obtem_estado(g):
 
     """
     A função recebe um gerador.
-    Devolve o seu estado.
+    Devolve seu estado.
     """
 
     return g['seed']
@@ -33,7 +33,7 @@ def obtem_bits(g):
 
     """
     A função recebe um gerador.
-    Devolve os seus bits.
+    Devolve seus bits.
     """
 
     return g['bits']
