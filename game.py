@@ -33,7 +33,7 @@ def obtem_bits(g):
 
     """
     A função recebe um gerador.
-    Devolve seus bits.
+    Devolve os seus bits.
     """
 
     return g['bits']
