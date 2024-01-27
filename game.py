@@ -187,7 +187,7 @@ def obtem_coordenadas_vizinhas(c):
 
     """
     A função recebe uma coordenada.
-    Devolve um tuplo com as coordenadas vizinhas àquela, no sentido horário.
+    Devolve um tuplo com as coordenadas vizinhas a aquela, no sentido horário.
     """
 
     if obtem_coluna(c) == 'A':
