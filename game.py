@@ -24,7 +24,7 @@ def obtem_estado(g):
 
     """
     A função recebe um gerador.
-    Devolve seu estado.
+    Devolve o seu estado.
     """
 
     return g['seed']
