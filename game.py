@@ -223,3 +223,50 @@ def obtem_coordenada_aleatoria(c, g):
     """
 
     return cria_coordenada(gera_carater_aleatorio(g, obtem_coluna(c)), gera_numero_aleatorio(g, obtem_linha(c)))
+
+def cria_parcela():
+
+    """
+    A função devolve uma parcela tapada sem mina.
+    """
+
+    return {'estado': '#', 'mina': False}
+
+def cria_copia_parcela(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve uma cópia sua.
+    """
+
+    return p.copy()
+
+def limpa_parcela(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve a parcela limpa.
+    """
+
+    p['estado'] = '?/X'
+    return p
+
+def marca_parcela(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve a parcela marcada.
+    """
+
+    p['estado'] = '@'
+    return p
+
+def desmarca_parcela(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve a parcela tapada.
+    """
+
+    p['estado'] = '#'
+    return p
