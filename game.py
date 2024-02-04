@@ -270,3 +270,53 @@ def desmarca_parcela(p):
 
     p['estado'] = '#'
     return p
+
+def esconde_mina(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve a parcela com mina.
+    """
+
+    p['mina'] = True
+    return p
+
+def eh_parcela(arg):
+
+    """
+    A função recebe um argumento.
+    Devolve True se for um TAD parcela, caso contrário, False.
+    """
+
+    if isinstance(arg, dict) and 'estado' in arg \
+        and isinstance(arg['estado'], str) and (arg['estado'] == '#' or arg['estado'] == '@' or arg['estado'] == '?/X') \
+        and 'mina' in arg and isinstance(arg['mina'], bool) and (arg['mina'] == True or arg['mina'] == False) and len(arg) == 2:
+            return True
+    return False
+
+def eh_parcela_tapada(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve True se for tapada, caso contrário, False.
+    """
+
+    return p['estado'] == '#'
+
+def eh_parcela_marcada(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve True se for marcada, caso contrário, False.
+    """
+
+    return p['estado'] == '@'
+
+def eh_parcela_limpa(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve True se for limpa, caso contrário, False.
+    """
+
+    return p['estado'] == '?/X'
