@@ -320,3 +320,50 @@ def eh_parcela_limpa(p):
     """
 
     return p['estado'] == '?/X'
+
+def eh_parcela_minada(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve True se for minada, caso contrário, False.
+    """
+
+    return p['mina']
+
+def parcelas_iguais(p1, p2):
+
+    """
+    A função recebe duas parcelas.
+    Devolve True se forem iguais, caso contrário, False.
+    """
+
+    return eh_parcela(p1) and eh_parcela(p2) and p1['estado'] == p2['estado'] and p1['mina'] == p2['mina']
+
+def parcela_para_str(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve uma string representando-a.
+    """
+
+    if p['estado'] == '?/X':
+        if p['mina']:
+            return 'X'
+        else:
+            return '?'
+    return p['estado']
+
+def alterna_bandeira(p):
+
+    """
+    A função recebe uma parcela.
+    Devolve True se desmarcar estando marcada ou se marcar estando tapada, caso contrário, False.
+    """
+
+    if eh_parcela_marcada(p):
+        desmarca_parcela(p)
+        return True
+    elif eh_parcela_tapada(p):
+        marca_parcela(p)
+        return True
+    return False
