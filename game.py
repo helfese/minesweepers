@@ -367,3 +367,66 @@ def alterna_bandeira(p):
         marca_parcela(p)
         return True
     return False
+
+def cria_campo(c, l):
+
+    """
+    A função recebe um carater e um inteiro correspondentes à ultima coluna e linha do campo.
+    Devolve o campo.
+    """
+
+    if not (isinstance(c, str) and 'A' <= c <= 'Z' and len(c) == 1 and isinstance(l, int) and 1 <= l <= 99):
+        raise ValueError('cria_campo: argumentos invalidos')
+
+    m = []
+    lin = 1
+    while lin <= l:
+        col = ord('A')
+        while col <= ord(c):
+            m += [[cria_parcela(), cria_coordenada(chr(col), lin)]]
+            col += 1
+        lin += 1
+    return m
+
+def cria_copia_campo(m):
+
+    """
+    A função recebe um campo.
+    Devolve uma cópia sua.
+    """
+
+    r = []
+    for items in m:
+        #print(items)
+        #print(coord)
+        r += [[cria_copia_parcela(items[0]), items[1]]]
+    return r
+
+def obtem_ultima_coluna(m):
+
+    """
+    A função recebe um campo.
+    Devolve a sua última coluna.
+    """
+
+    return sorted(m, key = lambda x: x[1][0], reverse = True)[0][1][0]
+
+def obtem_ultima_linha(m):
+
+    """
+    A função recebe um campo.
+    Devolve a sua última linha.
+    """
+
+    return sorted(m, key = lambda x: x[1][1], reverse = True)[0][1][1]
+
+def obtem_parcela(m, c):
+
+    """
+    A função recebe um campo e uma coordenada.
+    Devolve a parcela na coordenada do campo.
+    """
+
+    for item in m:
+        if item[1] == c:
+            return item[0]
