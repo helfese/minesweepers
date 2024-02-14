@@ -397,8 +397,6 @@ def cria_copia_campo(m):
 
     r = []
     for items in m:
-        #print(items)
-        #print(coord)
         r += [[cria_copia_parcela(items[0]), items[1]]]
     return r
 
@@ -430,3 +428,68 @@ def obtem_parcela(m, c):
     for item in m:
         if item[1] == c:
             return item[0]
+
+def obtem_coordenadas(m, s):
+
+    """
+    A função recebe um campo e um estado de parcela.
+    Devolve um tuplo ordenado com as coordenadas das parcelas com o estado.
+    """
+
+    tup = ()
+    if s == 'limpas':
+        for item in m:
+            if item[0]['estado'] == '?/X':
+                tup += (item[1],)
+    elif s == 'tapadas':
+        for item in m:
+            if item[0]['estado'] == '#': #or item[0]['estado'] == '@':
+                tup += (item[1],)
+    elif s == 'marcadas':
+        for item in m:
+            if item[0]['estado'] == '@':
+                tup += (item[1],)
+    elif s == 'minadas':
+        for item in m:
+            if item[0]['mina']:
+                tup += (item[1],)
+    return tup
+
+def obtem_numero_minas_vizinhas(m, c):
+
+    """
+    A função recebe um campo e uma coordenada.
+    Devolve o número de parcelas vizinhas com mina da parcela na coordenada.
+    """
+
+    num = 0
+    for coord in obtem_coordenadas_vizinhas(c):
+        if eh_coordenada_do_campo(m, coord) and eh_parcela_minada(obtem_parcela(m, coord)):
+            num += 1
+    return num
+
+def eh_campo(arg): 
+
+    """
+    A função recebe um argumento.
+    Devolve True se for um TAD campo, caso contrário, False.
+    """
+
+    if isinstance(arg, list):
+        for item in arg:
+            if not (eh_parcela(item[0]) and eh_coordenada(item[1]) and 10 <= len(arg) <= 26 * 99): #1 + 3 + 5 <= len(arg) <= 26 * 99 ???????????????????????????
+                return False
+        return True
+    return False
+
+def eh_coordenada_do_campo(m, c):
+
+    """
+    A função recebe um campo e uma coordenada.
+    Devolve True se a coordenada for do campo, caso contrário, False.
+    """
+
+    for item in m:
+        if item[1] == c:
+            return True
+    return False
