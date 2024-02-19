@@ -493,3 +493,73 @@ def eh_coordenada_do_campo(m, c):
         if item[1] == c:
             return True
     return False
+
+def campos_iguais(m1, m2):
+
+    """
+    A função recebe dois campos.
+    Devolve True se forem iguais, caso contrário, False.
+    """
+
+    Len = 0
+    if eh_campo(m1) and eh_campo(m2) and len(m1) == len(m2):
+        for item in m1:
+            if item in m2:
+               Len += 1
+        return len(m1) == Len
+    return False
+
+def campo_para_str(m):
+
+    """
+    A função recebe um campo.
+    Devolve uma string representando-o.
+    """
+
+def parcela_para_str_(p):
+
+    if eh_parcela_tapada(p):
+            return '#'
+    elif eh_parcela_marcada(p):
+            return '@'
+     elif eh_parcela_limpa(p):
+        if not eh_parcela_minada(p):
+            if obtem_numero_minas_vizinhas(m, z[1]) == 0:
+                return ' '
+            else:
+                return str(obtem_numero_minas_vizinhas(m, z[1]))
+          else: return 'X'
+    return p['estado']
+
+    cols = '   '+''.join([chr(x) for x in range(ord('A'), ord(obtem_ultima_coluna(m)) + 1)])+'\n  '
+    string = cols + '+'
+    len_cols = len(''.join(cols.split()))
+    for y in range(len_cols):
+        string += '-'
+    string += '+'
+    limit = string[4 + len_cols: 4 + 2 * len_cols + 4]
+    for y in range(1, obtem_ultima_linha(m) + 1):
+        string += '\n' + '{:0>2}'.format(y) + '|'
+        for z in m:
+            if z[1][1] == y:
+                string += parcela_para_str_(z[0])
+        string += '|'
+    string += '\n' + limit
+    return string
+
+def coloca_minas(m, c, g, n):
+
+    """
+    A função recebe um campo, uma coordenada, um gerador e um número.
+    Devolve o campo com o número de minas.
+    """
+
+    coord_minas = ()
+    i = 0
+    while i < n:
+        coord = obtem_coordenada_aleatoria(cria_coordenada(obtem_ultima_coluna(m), obtem_ultima_linha(m)), g)
+        if coord != c and coord not in obtem_coordenadas_vizinhas(c) and coord not in coord_minas:
+            esconde_mina(obtem_parcela(m, coord))
+            coord_minas += (coord,)
+            i += 1
+    return m
