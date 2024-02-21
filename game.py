@@ -563,3 +563,44 @@ def coloca_minas(m, c, g, n):
             coord_minas += (coord,)
             i += 1
     return m
+
+def limpa_campo(m, c):
+
+    """
+    A função recebe um campo e uma coordenada.
+    Devolve o campo com a parcela da coordenada limpa.
+    """
+
+    limpa_parcela(obtem_parcela(m, c))
+    limpas = [[c,True]]
+    for coord in obtem_coordenadas_vizinhas(c):
+            if eh_coordenada_do_campo(m, coord):
+                if eh_parcela_minada(obtem_parcela(m, coord)):
+                    return m
+    for coord in obtem_coordenadas_vizinhas(c):
+            if eh_coordenada_do_campo(m, coord) and not eh_parcela_limpa(obtem_parcela(m, coord)) and not eh_parcela_minada(obtem_parcela(m, coord)) and not eh_parcela_marcada(obtem_parcela(m, coord)):
+                limpa_parcela(obtem_parcela(m, coord))
+                limpas += [[coord, False]]
+            
+    for item in limpas:
+        if not item[1]:
+            limpa_campo(m, item[0])
+            
+    return m
+
+def jogo_ganho(m):
+
+    """
+    A função recebe um campo.
+    Devolve True se todas as parcelas sem minas estiverem limpas, caso contrário, False.
+    """
+
+    parcelas_minadas = []
+    for coord in obtem_coordenadas(m, 'minadas'):
+        parcelas_minadas += [obtem_parcela(m, coord)]
+    for item in m:
+        if item[0] not in parcelas_minadas:
+            if not eh_parcela_limpa(item[0]):
+                return False
+
+ return True
