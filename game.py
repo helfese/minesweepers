@@ -604,3 +604,26 @@ def jogo_ganho(m):
                 return False
 
  return True
+
+def turno_jogador(m):
+
+    """
+    A função recebe um campo.
+    Devolve inputs que permitem escolher fazer uma ação a uma coordenada.
+    """
+
+    global jogada
+    input_incorrect = True
+    while input_incorrect:
+        turnoLM = input('Escolha uma ação, [L]impar ou [M]arcar:')
+        if turnoLM == 'L' or turnoLM == 'M':
+            input_incorrect = False
+    input_incorrect = True
+    while input_incorrect:
+        turnoC = input('Escolha uma coordenada:')
+        jogada = turnoC
+        if 'A' <= turnoC[0] <= obtem_ultima_coluna(m) and len(turnoC) == 3: 
+            for L in turnoC[1:]:                
+                if '0' <= L <= '9':
+                    if eh_coordenada((turnoC[0], int(turnoC[1:]))) and eh_coordenada_do_campo(m, str_para_coordenada(turnoC)):
+                        input_incorrect = False
