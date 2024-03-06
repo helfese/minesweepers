@@ -627,3 +627,10 @@ def turno_jogador(m):
                 if '0' <= L <= '9':
                     if eh_coordenada((turnoC[0], int(turnoC[1:]))) and eh_coordenada_do_campo(m, str_para_coordenada(turnoC)):
                         input_incorrect = False
+        if jogo_ganho(m):
+            return False
+        if turnoLM == 'L':
+            limpa_campo(m, str_para_coordenada(turnoC))
+        elif turnoLM == 'M':
+            alterna_bandeira(obtem_parcela(m, str_para_coordenada(turnoC)))
+        
